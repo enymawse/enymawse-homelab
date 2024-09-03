@@ -1,0 +1,45 @@
+version: "3.4"
+networks:
+  default:
+    name: basket
+    external: true
+volumes:
+  config: {}
+  metadata: {}
+  cache: {}
+  blobs: {}
+  generated: {}
+  data:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: "addr=nas.home,rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14,nolock,soft,nfsvers=4"
+      device: ":/volume1/data/"
+
+services:
+  stash:
+    image: stashapp/stash:latest
+    restart: unless-stopped
+    ports:
+      - "9999:9999"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "10"
+        max-size: "2m"
+    environment:
+      - STASH_STASH=/data/
+      - STASH_GENERATED=/generated/
+      - STASH_METADATA=/metadata/
+      - STASH_CACHE=/cache/
+      - STASH_PORT=9999
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - config:/root/.stash
+      - data:/data
+      - metadata:/metadata
+      - cache:/cache
+      - blobs:/blobs
+      - generated:/generated
+    labels:
+      traefik.http.routers.stash-http.rule: Host(`stash.home`)
