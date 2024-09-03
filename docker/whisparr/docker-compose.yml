@@ -16,6 +16,7 @@ volumes:
 
 services:
   whisparr:
+    container_name: whisparr
     image: ghcr.io/hotio/whisparr:v3
     restart: unless-stopped
     logging:

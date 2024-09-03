@@ -12,6 +12,7 @@ volumes:
 
 services:
   stash:
+    container_name: stash
     image: stashapp/stash:latest
     restart: unless-stopped
     ports:
