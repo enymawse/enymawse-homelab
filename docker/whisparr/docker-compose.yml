@@ -13,6 +13,7 @@ volumes:
       o: "addr=nas.home,rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14,nolock,soft,nfsvers=4"
       device: ":/volume1/data/"
   whisparr: {}
+  whisparr_cert: {}
 
 services:
   whisparr:
@@ -27,6 +28,7 @@ services:
       TZ: America/Los_Angeles
     volumes:
       - whisparr:/config
+      - whisparr_cert:/certs
       - data:/data
     labels:
       traefik.http.routers.whisparr-http.rule: Host(`whisparr.home`)
