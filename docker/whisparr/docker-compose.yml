@@ -24,7 +24,7 @@ services:
       driver: json-file
     ports:
       - 16969:6969
-      - 8008:8008
+      - 8008:443
     environment:
       TZ: America/Los_Angeles
     volumes:
