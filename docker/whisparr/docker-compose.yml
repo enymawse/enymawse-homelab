@@ -37,3 +37,4 @@ services:
       traefik.http.routers.whisparr-http.rule: Host(`whisparr.home`)
       traefik.http.routers.whisparr-https.entrypoints: websecure
       traefik.http.routers.whisparr-https.rule: Host(`whisparr.home`)
+      traefik.http.routers.whisparr-https.tls: true
