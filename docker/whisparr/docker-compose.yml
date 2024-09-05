@@ -24,6 +24,7 @@ services:
       driver: json-file
     ports:
       - 16969:6969
+      - 8008:8008
     environment:
       TZ: America/Los_Angeles
     volumes:
@@ -31,4 +32,8 @@ services:
       - cert:/certs
       - data:/data
     labels:
+      traefik.http.services.whisparr.loadbalancer.server.port: 6969
+      traefik.http.routers.whisparr-http.entrypoints: web
       traefik.http.routers.whisparr-http.rule: Host(`whisparr.home`)
+      traefik.http.routers.whisparr-https.entrypoints: websecure
+      traefik.http.routers.whisparr-https.rule: Host(`whisparr.home`)
