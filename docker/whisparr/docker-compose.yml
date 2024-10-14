@@ -18,7 +18,7 @@ volumes:
 services:
   whisparr:
     container_name: whisparr
-    image: ghcr.io/hotio/whisparr:v3
+    image: ghcr.io/hotio/whisparr:v3-3.0.0.614
     restart: unless-stopped
     logging:
       driver: json-file
