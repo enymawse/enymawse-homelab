@@ -3,12 +3,6 @@ networks:
   default:
     name: basket
     external: true
-volumes:
-  config: {}
-  metadata: {}
-  cache: {}
-  blobs: {}
-  generated: {}
 
 services:
   stash:
@@ -30,11 +24,11 @@ services:
       - STASH_PORT=9999
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - config:/root/.stash
       - /volume1/data/media:/data
-      - metadata:/metadata
-      - cache:/cache
-      - blobs:/blobs
-      - generated:/generated
+      - /volume1/docker/stash/config:/root/.stash
+      - /volume1/docker/stash/metadata:/metadata
+      - /volume1/docker/stash/cache:/cache
+      - /volume1/docker/stash/blobs:/blobs
+      - /volume1/docker/stash/generated:/generated
     labels:
       traefik.http.routers.stash-http.rule: Host(`stash.home`)

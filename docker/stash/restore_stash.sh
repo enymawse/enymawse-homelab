@@ -1,4 +1,5 @@
-for volume in /root/.stash /cache /metadata /blobs /generated; do
+# for volume in /root/.stash /cache /metadata /blobs /generated; do
+for volume in /cache /metadata /blobs /generated; do
   # Generate a sanitized name for the backup file
   volume_name=$(echo "${volume}" | sed 's|/|_|g' | sed 's|^_||')
 
@@ -10,7 +11,7 @@ for volume in /root/.stash /cache /metadata /blobs /generated; do
   # The database will need to be restored via the UI
   #
   #########
-  host_dir="/host_data${volume}"
+  host_dir="/volume1/docker/stash${volume}"
 
   # Ensure the host directory exists
   mkdir -p "${host_dir}"
