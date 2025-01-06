@@ -4,7 +4,6 @@
 #
 ###############
 
-
 for volume in /config /certs; do
   volume_name=$(echo "${volume}" | sed 's|/|_|g' | sed 's|^_||')
   sudo docker run --rm \
