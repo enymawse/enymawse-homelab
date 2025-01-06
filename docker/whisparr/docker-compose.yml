@@ -5,16 +5,6 @@ networks:
     name: basket
     external: true
 
-volumes:
-  data:
-    driver: local
-    driver_opts:
-      type: nfs
-      o: "addr=nas.home,rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14,nolock,soft,nfsvers=4"
-      device: ":/volume1/data/"
-  whisparr: {}
-  cert: {}
-
 services:
   whisparr:
     container_name: whisparr
@@ -28,9 +18,9 @@ services:
     environment:
       TZ: America/Los_Angeles
     volumes:
-      - whisparr:/config
-      - cert:/certs
-      - data:/data
+      - /mnt/syno_docker_nfs/whisparr/config:/config
+      - /mnt/syno_docker_nfs/whisparr/cert:/certs
+      - /mnt/syno_data_nfs:/data
     labels:
       traefik.http.services.whisparr.loadbalancer.server.port: 6969
       traefik.http.routers.whisparr-http.entrypoints: web
