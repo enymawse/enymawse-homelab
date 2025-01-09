@@ -17,8 +17,8 @@ services:
     environment:
       TZ: America/Los_Angeles
     volumes:
-      - /mnt/syno_docker_nfs/whisparr/config:/config
-      - /mnt/syno_docker_nfs/whisparr/certs:/certs
+      - /etc/docker/whisparr/config:/config
+      - /etc/docker/whisparr/certs:/certs
       - /mnt/syno_data_nfs:/data
     labels:
       traefik.http.services.whisparr.loadbalancer.server.port: 6969
