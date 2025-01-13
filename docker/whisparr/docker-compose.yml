@@ -15,6 +15,9 @@ services:
       - 16969:6969
       - 8008:443
     environment:
+      PUID: 950
+      PGID: 950
+      UMASK: 002
       TZ: America/Los_Angeles
     volumes:
       - /mnt/store/containers/whisparr/config:/config
