@@ -1,8 +1,8 @@
 ---
 networks:
   default:
-    name: basket
     external: true
+    name: proxynet
 
 services:
   whisparr:
@@ -17,13 +17,6 @@ services:
     environment:
       TZ: America/Los_Angeles
     volumes:
-      - /etc/docker/whisparr/config:/config
-      - /etc/docker/whisparr/certs:/certs
-      - /mnt/syno_data_nfs:/data
-    labels:
-      traefik.http.services.whisparr.loadbalancer.server.port: 6969
-      traefik.http.routers.whisparr-http.entrypoints: web
-      traefik.http.routers.whisparr-http.rule: Host(`whisparr.home`)
-      traefik.http.routers.whisparr-https.entrypoints: websecure
-      traefik.http.routers.whisparr-https.rule: Host(`whisparr.home`)
-      traefik.http.routers.whisparr-https.tls: true
+      - /mnt/store/containers/whisparr/config:/config
+      - /mnt/store/containers/whisparr/certs:/certs
+      - /mnt/store/media:/data
