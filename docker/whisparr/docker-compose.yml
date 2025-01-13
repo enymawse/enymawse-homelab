@@ -19,6 +19,7 @@ services:
       PGID: 950
       UMASK: 002
       TZ: America/Los_Angeles
+    hostname: whisparr
     volumes:
       - /mnt/store/containers/whisparr/config:/config
       - /mnt/store/containers/whisparr/certs:/certs
