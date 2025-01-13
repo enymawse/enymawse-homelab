@@ -1,8 +1,8 @@
-version: "3.4"
+---
 networks:
   default:
-    name: basket
     external: true
+    name: proxynet
 
 services:
   stash:
@@ -10,25 +10,23 @@ services:
     image: stashapp/stash:latest
     restart: unless-stopped
     ports:
-      - "9999:9999"
+      - 9999:9999
     logging:
       driver: "json-file"
       options:
         max-file: "10"
         max-size: "2m"
     environment:
-      - STASH_STASH=/data/
-      - STASH_GENERATED=/generated/
-      - STASH_METADATA=/metadata/
-      - STASH_CACHE=/cache/
-      - STASH_PORT=9999
+      STASH_STASH: /data/
+      STASH_GENERATED: /generated/
+      STASH_METADATA: /metadata/
+      STASH_CACHE: /cache/
+      STASH_PORT: 9999
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /volume1/data/media:/data
-      - /volume1/docker/stash/config:/root/.stash
-      - /volume1/docker/stash/metadata:/metadata
-      - /volume1/docker/stash/cache:/cache
-      - /volume1/docker/stash/blobs:/blobs
-      - /volume1/docker/stash/generated:/generated
-    labels:
-      traefik.http.routers.stash-http.rule: Host(`stash.home`)
+      - /mnt/store/media:/data
+      - /mnt/store/containers/stash/config:/root/.stash
+      - /mnt/store/containers/stash/metadata:/metadata
+      - /mnt/store/containers/stash/cache:/cache
+      - /mnt/store/containers/stash/blobs:/blobs
+      - /mnt/store/containers/stash/generated:/generated
