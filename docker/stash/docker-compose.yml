@@ -22,6 +22,9 @@ services:
       STASH_METADATA: /metadata/
       STASH_CACHE: /cache/
       STASH_PORT: 9999
+    devices:
+      - /dev/dri:/dev/dri
+    command: /bin/sh -c "apk --no-cache add intel-media-driver && stash"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /mnt/store/media:/data
