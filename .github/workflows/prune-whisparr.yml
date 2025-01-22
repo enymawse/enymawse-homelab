@@ -1,0 +1,51 @@
+name: WhisparrPrune Workflow
+
+on:
+  schedule:
+    - cron: "0 7 * * *" # 11 PM Pacific Time (PST = UTC-8, adjust for DST)
+
+jobs:
+  whisparrprune:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Cache Python dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create .env file
+        env:
+          WHISPARR_BASEURL: ${{ secrets.WHISPARR_BASEURL }}
+          WHISPARR_APIKEY: ${{ secrets.WHISPARR_APIKEY }}
+        run: |
+          echo "WHISPARR_BASEURL=$WHISPARR_BASEURL" >> .env
+          echo "WHISPARR_APIKEY=$WHISPARR_APIKEY" >> .env
+
+      - name: Run WhisparrPrune script
+        run: python3 WhisparrPrune.py -d 365
+
+      - name: Remove .env file
+        run: |
+          if [ -f .env ]; then
+            rm .env
+          fi
+
+      - name: Cleanup actions
+        run: |
+          # Add any additional cleanup commands here if needed
+          echo "Cleanup completed."
