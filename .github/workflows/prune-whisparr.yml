@@ -3,6 +3,7 @@ name: WhisparrPrune Workflow
 on:
   schedule:
     - cron: "0 7 * * *" # 11 PM Pacific Time (PST = UTC-8, adjust for DST)
+  workflow_dispatch:
 
 jobs:
   whisparrprune:
