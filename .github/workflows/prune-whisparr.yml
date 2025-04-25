@@ -40,7 +40,7 @@ jobs:
           echo "WHISPARR_APIKEY=$WHISPARR_APIKEY" >> .env
 
       - name: Run WhisparrPrune script
-        run: python3 WhisparrPrune.py -d 180
+        run: python3 WhisparrPrune.py -d 60
 
       - name: Remove .env file
         run: |
