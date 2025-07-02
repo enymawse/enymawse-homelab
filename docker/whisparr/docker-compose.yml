@@ -1,4 +1,9 @@
 ---
+networks:
+  default:
+    external: true
+    name: proxynet
+
 services:
   whisparr:
     container_name: whisparr
@@ -7,7 +12,7 @@ services:
     logging:
       driver: json-file
     ports:
-      - 6969:6969
+      - 16969:6969
       - 8008:443
     environment:
       PUID: 950
