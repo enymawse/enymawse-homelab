@@ -9,8 +9,6 @@ services:
     container_name: stash
     image: stashapp/stash:latest
     restart: unless-stopped
-    ports:
-      - 9999:9999
     logging:
       driver: "json-file"
       options:
